@@ -3,6 +3,6 @@ import bodyParser from 'koa-bodyparser';
 
 const app = new Koa();
 
-app.use(bodyParser())
+app.use(bodyParser());
 
 export default app;
