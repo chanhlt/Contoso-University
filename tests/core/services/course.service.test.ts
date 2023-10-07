@@ -21,16 +21,14 @@ describe('`Course` service', () => {
       rows: courses
     })
   );
-  courseEntity.updateCourse = jest.fn(
-    (id: number, payload: Partial<Course>) => {
-      const course = courses.find((c) => c.id === id) ?? null;
-      if (!course) {
-        throw new Error('Course not found!');
-      }
-      Object.assign(course, payload);
-      return Promise.resolve(course);
+  courseEntity.updateCourse = jest.fn((id: number, payload: Partial<Course>) => {
+    const course = courses.find((c) => c.id === id) ?? null;
+    if (!course) {
+      throw new Error('Course not found!');
     }
-  );
+    Object.assign(course, payload);
+    return Promise.resolve(course);
+  });
 
   courseEntity.deleteCourse = jest.fn((id: number) => {
     const index = courses.findIndex((c) => c.id === id);

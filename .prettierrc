@@ -4,5 +4,6 @@
   "tabWidth": 2,
   "endOfLine": "auto",
   "singleQuote": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "printWidth": 120
 }

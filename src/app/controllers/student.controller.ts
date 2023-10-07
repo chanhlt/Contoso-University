@@ -1,9 +1,6 @@
 import { RouterContext } from 'koa-router';
 
-import {
-  StudentCreateRequestModel,
-  StudentUpdateRequestModel
-} from '../models/student.model';
+import { StudentCreateRequestModel, StudentUpdateRequestModel } from '../models/student.model';
 import { StudentService } from '../../core/services/student.service';
 import { SimpleStudentRepository } from '../repositories/simple.student.repository';
 
@@ -21,10 +18,7 @@ const studentController = {
     const studentId = Number(ctx.params.id);
     const updateData = new StudentUpdateRequestModel(ctx.request.body);
     const studentService = new StudentService(studentRepository);
-    const updatedStudent = await studentService.updateStudent(
-      studentId,
-      updateData
-    );
+    const updatedStudent = await studentService.updateStudent(studentId, updateData);
     ctx.body = updatedStudent;
   }
 };

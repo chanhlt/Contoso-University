@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["contoso"]
+  "cSpell.words": ["contoso"],
+  "editor.formatOnSave": true
 }

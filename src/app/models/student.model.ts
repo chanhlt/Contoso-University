@@ -9,15 +9,7 @@ interface StudentModel {
   enrollmentDate: Date;
 }
 
-export class StudentCreateRequestModel extends BaseModel {
-  get id() {
-    const id = this.get<number>('id');
-    if (id && isNaN(id)) {
-      throw new AppError(ERROR.STUDENT_ID_MUST_BE_A_NUMBER);
-    }
-    return undefined;
-  }
-
+export class StudentCreateRequestModel extends BaseModel<StudentModel> {
   get firstName() {
     const firstName = this.get<string>('firstName');
     if (!firstName) {
@@ -43,7 +35,7 @@ export class StudentCreateRequestModel extends BaseModel {
   }
 }
 
-export class StudentUpdateRequestModel extends BaseModel {
+export class StudentUpdateRequestModel extends BaseModel<StudentModel> {
   get firstName() {
     const firstName = this.get<string>('firstName');
     if (firstName !== undefined && !firstName) {
@@ -62,13 +54,17 @@ export class StudentUpdateRequestModel extends BaseModel {
 
   get enrollmentDate() {
     const enrollmentDate = this.get<Date>('enrollmentDate');
-    if (
-      enrollmentDate !== undefined &&
-      !enrollmentDate &&
-      !new Date(enrollmentDate)
-    ) {
+    if (enrollmentDate !== undefined && !enrollmentDate && !new Date(enrollmentDate)) {
       throw new AppError(ERROR.STUDENT_ENROLLMENT_DATE_IS_REQUIRED);
     }
     return enrollmentDate;
+  }
+
+  toJSON() {
+    return {
+      lastName: this.lastName,
+      firstName: this.firstName,
+      enrollmentDate: this.enrollmentDate
+    };
   }
 }
