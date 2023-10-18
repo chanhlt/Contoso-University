@@ -1,4 +1,4 @@
-import { AppError } from '../errors/app-error';
+import { BadRequestError } from '../errors/bad-request.error';
 import { ERROR } from '../errors/error-code';
 
 export class Course {
@@ -11,10 +11,10 @@ export class Course {
 
   validate() {
     if (!this.name) {
-      throw new AppError(ERROR.COURSE_NAME_IS_REQUIRED);
+      throw new BadRequestError(ERROR.COURSE_NAME_IS_REQUIRED);
     }
     if (!this.startDate) {
-      throw new AppError(ERROR.COURSE_START_DATE_IS_REQUIRED);
+      throw new BadRequestError(ERROR.COURSE_START_DATE_IS_REQUIRED);
     }
   }
 
@@ -22,7 +22,7 @@ export class Course {
     this._id = id;
   }
 
-  get id(): number |undefined {
+  get id(): number | undefined {
     return this._id;
   }
 }
