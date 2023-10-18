@@ -5,7 +5,16 @@ export const errorHandler = async (ctx: Context, next: Next) => {
   try {
     await next();
   } catch (error) {
-    ctx.status = (error as AppError)['status'] ?? 500;
-    ctx.body = error;
+    if (error instanceof AppError) {
+      ctx.status = error.status;
+      ctx.body = error;
+    } else {
+      ctx.status = 500;
+      ctx.body = {
+        status: 500,
+        code: 'UNKNOWN_ERROR',
+        error: 'Unknown error'
+      };
+    }
   }
 };
