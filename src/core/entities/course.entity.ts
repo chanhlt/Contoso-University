@@ -1,6 +1,8 @@
+import { AppError } from '../errors/app-error';
 import { ERROR } from '../errors/error-code';
 
 export class Course {
+  private _id: number | undefined = undefined;
   constructor(
     public readonly name: string,
     public readonly startDate: Date,
@@ -9,10 +11,18 @@ export class Course {
 
   validate() {
     if (!this.name) {
-      throw new Error(ERROR.COURSE_NAME_IS_REQUIRED);
+      throw new AppError(ERROR.COURSE_NAME_IS_REQUIRED);
     }
     if (!this.startDate) {
-      throw new Error(ERROR.COURSE_START_DATE_IS_REQUIRED);
+      throw new AppError(ERROR.COURSE_START_DATE_IS_REQUIRED);
     }
+  }
+
+  set id(id: number) {
+    this._id = id;
+  }
+
+  get id(): number |undefined {
+    return this._id;
   }
 }
