@@ -2,11 +2,11 @@ import { BadRequestError } from '../errors/bad-request.error';
 import { ERROR } from '../errors/error-code';
 
 export class Course {
-  private _id: number | undefined = undefined;
+  public id: number | undefined;
   constructor(
-    public readonly name: string,
-    public readonly startDate: Date,
-    public readonly endDate: Date | undefined
+    public name: string,
+    public startDate: Date,
+    public endDate: Date | undefined
   ) {}
 
   validate() {
@@ -16,13 +16,5 @@ export class Course {
     if (!this.startDate) {
       throw new BadRequestError(ERROR.COURSE_START_DATE_IS_REQUIRED);
     }
-  }
-
-  set id(id: number) {
-    this._id = id;
-  }
-
-  get id(): number | undefined {
-    return this._id;
   }
 }

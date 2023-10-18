@@ -8,7 +8,7 @@ export class CreateCourseInteractor {
   }
 
   public execute(name: string, startDate: Date, endDate?: Date): Promise<Course> {
-    const course = new Course(name, startDate, endDate)
+    const course = new Course(name, startDate, endDate);
     course.validate();
     return this.courseRepository.create(course);
   }
