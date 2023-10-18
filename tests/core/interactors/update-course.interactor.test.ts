@@ -4,7 +4,7 @@ import { ITransaction } from '../../../src/core/transaction';
 import { ERROR } from '../../../src/core/errors/error-code';
 
 describe('UpdateCourseInteractor', () => {
-  test('Update course with valid ID and payload=> should be OK', async () => {
+  test('Update course name with valid ID and payload => should be OK', async () => {
     const courseRepository = {} as ICourseRepository;
 
     const name = 'Name 1';
@@ -46,6 +46,100 @@ describe('UpdateCourseInteractor', () => {
       name: name2,
       startDate
     });
+    expect(courseRepository.update).toBeCalledWith(1, { name: name2 });
+  });
+
+  test('Update course startDate with valid ID and payload => should be OK', async () => {
+    const courseRepository = {} as ICourseRepository;
+
+    const name = 'Name 1';
+    const startDate = new Date();
+    const startDate2 = new Date(startDate);
+    startDate2.setMonth(startDate.getMonth() + 1);
+    courseRepository.findById = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate
+      })
+    );
+
+    courseRepository.update = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate: startDate2
+      })
+    );
+
+    courseRepository.findById = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate: startDate2
+      })
+    );
+
+    const transaction = {} as ITransaction;
+    transaction.begin = jest.fn(() => Promise.resolve());
+    transaction.commit = jest.fn(() => Promise.resolve());
+
+    const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
+    const course = await updateCourseInteractor.execute(1, { startDate: startDate2 });
+    expect(course).toEqual({
+      id: 1,
+      name,
+      startDate: startDate2
+    });
+    expect(courseRepository.update).toBeCalledWith(1, { startDate: startDate2 });
+  });
+
+  test('Update course endDate with valid ID and payload => should be OK', async () => {
+    const courseRepository = {} as ICourseRepository;
+
+    const name = 'Name 1';
+    const startDate = new Date();
+    const endDate = new Date(startDate);
+    endDate.setFullYear(startDate.getFullYear() + 1);
+    courseRepository.findById = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate
+      })
+    );
+
+    courseRepository.update = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate,
+        endDate
+      })
+    );
+
+    courseRepository.findById = jest.fn(() =>
+      Promise.resolve({
+        id: 1,
+        name,
+        startDate,
+        endDate
+      })
+    );
+
+    const transaction = {} as ITransaction;
+    transaction.begin = jest.fn(() => Promise.resolve());
+    transaction.commit = jest.fn(() => Promise.resolve());
+
+    const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
+    const course = await updateCourseInteractor.execute(1, { endDate });
+    expect(course).toEqual({
+      id: 1,
+      name,
+      startDate,
+      endDate
+    });
+    expect(courseRepository.update).toBeCalledWith(1, { endDate });
   });
 
   test('Update course without ID => should receive 404 error', async () => {
