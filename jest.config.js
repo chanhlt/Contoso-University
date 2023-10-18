@@ -3,5 +3,5 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   coverageReporters: ['html', 'text-summary'],
-  collectCoverageFrom: ['src/**/*.ts']
+  collectCoverageFrom: ['src/core/**/*.ts']
 };
