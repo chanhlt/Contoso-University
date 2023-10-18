@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "NODE_ENV=development HTTP_PORT=3000 nodemon --watch src src/index.ts",
-    "start": "NODE_ENV=development HTTP_PORT=3000 node .",
+    "start": "NODE_ENV=production HTTP_PORT=3000 node .",
     "build": "rm -rf dist | true && tsc -p .",
     "test": "jest --coverage --verbose --detectOpenHandles",
     "format": "prettier --write ."
