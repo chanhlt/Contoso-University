@@ -2,11 +2,11 @@ import { BadRequestError } from '../errors/bad-request.error';
 import { ERROR } from '../errors/error-code';
 
 export class Course {
-  public id: number | undefined;
+  public id?: number;
   constructor(
     public name: string,
     public startDate: Date,
-    public endDate: Date | undefined
+    public endDate?: Date
   ) {}
 
   validate() {

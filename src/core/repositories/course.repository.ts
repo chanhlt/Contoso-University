@@ -1,5 +1,5 @@
-import { Course } from "../entities/course.entity";
+import { Course } from '../entities/course.entity';
 
-export interface ICourseRepository{
-    create(createCourse: Course): Promise<Course>;
+export interface ICourseRepository {
+  create(createCourse: Course): Promise<Omit<Course, 'validate'>>;
 }

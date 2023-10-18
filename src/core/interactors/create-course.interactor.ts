@@ -7,7 +7,7 @@ export class CreateCourseInteractor {
     this.courseRepository = courseRepository;
   }
 
-  public execute(name: string, startDate: Date, endDate?: Date): Promise<Course> {
+  public execute(name: string, startDate: Date, endDate?: Date): Promise<Omit<Course, 'validate'>> {
     const course = new Course(name, startDate, endDate);
     course.validate();
     return this.courseRepository.create(course);
