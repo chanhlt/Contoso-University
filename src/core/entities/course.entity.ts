@@ -1,10 +1,18 @@
-import { Course } from '../interfaces/course.interface';
-import { IQuery } from '../interfaces/query.interface';
+import { ERROR } from '../errors/error-code';
 
-export interface ICourseEntity {
-  createCourse(course: Course): Promise<Course>;
-  updateCourse(id: number, payload: Partial<Course>): Promise<Course>;
-  findCourses(query?: IQuery): Promise<{ count: number; rows: Course[] }>;
-  getCourse(id: number): Promise<Course | null>;
-  deleteCourse(id: number): Promise<void>;
+export class Course {
+  constructor(
+    public readonly name: string,
+    public readonly startDate: Date,
+    public readonly endDate: Date | undefined
+  ) {}
+
+  validate() {
+    if (!this.name) {
+      throw new Error(ERROR.COURSE_NAME_IS_REQUIRED);
+    }
+    if (!this.startDate) {
+      throw new Error(ERROR.COURSE_START_DATE_IS_REQUIRED);
+    }
+  }
 }
