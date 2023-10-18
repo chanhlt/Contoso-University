@@ -1,6 +1,3 @@
-import { BadRequestError } from '../errors/bad-request.error';
-import { ERROR } from '../errors/error-code';
-
 export class Course {
   public id?: number;
   constructor(
@@ -8,13 +5,4 @@ export class Course {
     public startDate: Date,
     public endDate?: Date
   ) {}
-
-  validate() {
-    if (!this.name) {
-      throw new BadRequestError(ERROR.COURSE_NAME_IS_REQUIRED);
-    }
-    if (!this.startDate) {
-      throw new BadRequestError(ERROR.COURSE_START_DATE_IS_REQUIRED);
-    }
-  }
 }

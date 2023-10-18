@@ -1,7 +1,7 @@
 import { ICourseRepository } from '../repositories/course.repository';
-import { Course } from '../entities/course.entity';
+import { CourseResponseModel } from '../response-models/course.response-model';
 
-type CourseList = { count: number; rows: Omit<Course, 'validate'>[] };
+type CourseList = { count: number; rows: CourseResponseModel[] };
 
 export class ListCoursesInteractor {
   private readonly courseRepository: ICourseRepository;
@@ -15,7 +15,7 @@ export class ListCoursesInteractor {
     const offset = (page - 1) * limit;
     const count = await this.courseRepository.count();
     const rows = await this.courseRepository.list(offset, limit);
-    return { count, rows };
+    return { count, rows: rows.map((row) => new CourseResponseModel(row)) };
   }
 
   private toPositiveInt(input: number, def: number) {

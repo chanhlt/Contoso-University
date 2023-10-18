@@ -1,7 +1,7 @@
 import { ICourseRepository } from '../repositories/course.repository';
-import { Course } from '../entities/course.entity';
 import { NotFoundError } from '../errors/not-found.error';
 import { ERROR } from '../errors/error-code';
+import { CourseResponseModel } from '../response-models/course.response-model';
 
 export class GetCourseInteractor {
   private readonly courseRepository: ICourseRepository;
@@ -9,7 +9,7 @@ export class GetCourseInteractor {
     this.courseRepository = courseRepository;
   }
 
-  public async execute(id: number | undefined): Promise<Omit<Course, 'validate'>> {
+  public async execute(id: number | undefined): Promise<CourseResponseModel> {
     id = this.toPositiveInt(id);
     if (!id) {
       throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
@@ -18,7 +18,7 @@ export class GetCourseInteractor {
     if (!course) {
       throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
     }
-    return course;
+    return new CourseResponseModel(course);
   }
 
   private toPositiveInt(input: number | undefined) {

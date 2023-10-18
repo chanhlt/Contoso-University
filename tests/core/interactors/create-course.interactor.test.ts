@@ -15,7 +15,7 @@ describe('CreateCourseInteractor', () => {
       })
     );
     const createCourseInteractor = new CreateCourseInteractor(courseRepository);
-    const course = await createCourseInteractor.execute(name, startDate);
+    const course = await createCourseInteractor.execute({ name, startDate });
     expect(course).toEqual({
       id: 1,
       name,
@@ -29,7 +29,7 @@ describe('CreateCourseInteractor', () => {
     const startDate = new Date();
     const createCourseInteractor = new CreateCourseInteractor(courseRepository);
     await expect(async () => {
-      await createCourseInteractor.execute(name, startDate);
+      await createCourseInteractor.execute({ name, startDate });
     }).rejects.toThrow(ERROR.COURSE_NAME_IS_REQUIRED);
   });
 
@@ -39,7 +39,7 @@ describe('CreateCourseInteractor', () => {
     const startDate = undefined as unknown as Date;
     const createCourseInteractor = new CreateCourseInteractor(courseRepository);
     await expect(async () => {
-      await createCourseInteractor.execute(name, startDate);
+      await createCourseInteractor.execute({ name, startDate });
     }).rejects.toThrow(ERROR.COURSE_START_DATE_IS_REQUIRED);
   });
 
@@ -58,7 +58,7 @@ describe('CreateCourseInteractor', () => {
       })
     );
     const createCourseInteractor = new CreateCourseInteractor(courseRepository);
-    const course = await createCourseInteractor.execute(name, startDate, endDate);
+    const course = await createCourseInteractor.execute({ name, startDate, endDate });
     expect(course).toEqual({
       id: 1,
       name,

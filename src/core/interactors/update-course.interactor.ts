@@ -1,15 +1,10 @@
 import { ICourseRepository } from '../repositories/course.repository';
-import { Course } from '../entities/course.entity';
 import { NotFoundError } from '../errors/not-found.error';
 import { ERROR } from '../errors/error-code';
 import { BadRequestError } from '../errors/bad-request.error';
 import { ITransaction } from '../transaction';
-
-type UpdateCoursePayload = {
-  name?: string;
-  startDate?: Date;
-  endDate?: Date;
-};
+import { CourseRequestModel } from '../request-models/course.request-model';
+import { CourseResponseModel } from '../response-models/course.response-model';
 
 export class UpdateCourseInteractor {
   private readonly courseRepository: ICourseRepository;
@@ -20,7 +15,7 @@ export class UpdateCourseInteractor {
     this.transaction = transaction;
   }
 
-  public async execute(id: number | undefined, payload: UpdateCoursePayload): Promise<Omit<Course, 'validate'>> {
+  public async execute(id: number | undefined, payload: Partial<CourseRequestModel>): Promise<CourseResponseModel> {
     id = this.toPositiveInt(id);
     if (!id) {
       throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
@@ -37,14 +32,14 @@ export class UpdateCourseInteractor {
       await this.courseRepository.update(id, payload);
       const updated = await this.courseRepository.findById(id);
       await this.transaction.commit();
-      return updated!;
+      return new CourseResponseModel(updated!);
     } catch (error) {
       await this.transaction.rollback();
       throw error;
     }
   }
 
-  private isEmpty(payload: UpdateCoursePayload) {
+  private isEmpty(payload: Partial<CourseRequestModel>) {
     if (!payload) {
       return true;
     }

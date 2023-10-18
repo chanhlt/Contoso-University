@@ -1,15 +1,9 @@
 import { Course } from '../entities/course.entity';
 
-type UpdateCoursePayload = {
-  name?: string;
-  startDate?: Date;
-  endDate?: Date;
-};
-
 export interface ICourseRepository {
-  update(id: number, payload: UpdateCoursePayload): Promise<Omit<Course, 'validate'>>;
-  findById(id: number): Promise<Omit<Course, 'validate'> | null>;
-  create(createCourse: Course): Promise<Omit<Course, 'validate'>>;
-  list(offset: number, limit: number): Promise<Omit<Course, 'validate'>[]>;
+  update(id: number, payload: Partial<Course>): Promise<Course>;
+  findById(id: number): Promise<Course | null>;
+  create(createCourse: Course): Promise<Course>;
+  list(offset: number, limit: number): Promise<Course[]>;
   count(): Promise<number>;
 }
