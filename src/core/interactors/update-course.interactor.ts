@@ -34,7 +34,6 @@ export class UpdateCourseInteractor {
       if (!course) {
         throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
       }
-      Object.assign(course, payload);
       await this.courseRepository.update(id, payload);
       const updated = await this.courseRepository.findById(id);
       await this.transaction.commit();
