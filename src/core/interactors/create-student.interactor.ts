@@ -1,13 +1,7 @@
 import { Student } from '../entities/student.entity';
-import { Grade } from '../enums/grade.enum';
 import { IStudentRepository } from '../repositories/student.repository';
-
-type CreateStudentPayload = {
-  firstName: string;
-  lastName: string;
-  enrollmentDate: Date;
-  grade?: Grade;
-};
+import { StudentRequestModel } from '../request-models/student.request-model';
+import { StudentResponseModel } from '../response-models/student.response-model';
 
 export class CreateStudentInteractor {
   private readonly studentRepository: IStudentRepository;
@@ -15,10 +9,10 @@ export class CreateStudentInteractor {
     this.studentRepository = studentRepository;
   }
 
-  public execute(payload: CreateStudentPayload): Promise<Omit<Student, 'validate'>> {
+  public async execute(payload: StudentRequestModel): Promise<StudentResponseModel> {
     const { firstName, lastName, grade, enrollmentDate } = payload;
     const student = new Student(firstName, lastName, enrollmentDate, grade);
-    student.validate();
-    return this.studentRepository.create(student);
+    const createdStudent = await this.studentRepository.create(student);
+    return new StudentResponseModel(createdStudent);
   }
 }
