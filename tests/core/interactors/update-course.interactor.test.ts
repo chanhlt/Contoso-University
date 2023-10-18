@@ -11,29 +11,12 @@ describe('UpdateCourseInteractor', () => {
     const name2 = 'Name 2';
     const startDate = new Date();
 
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate
-      })
-    );
+    const origin = { id: 1, name, startDate };
+    const updated = { id: 1, name: name2, startDate };
 
-    courseRepository.update = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name: name2,
-        startDate
-      })
-    );
-
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name: name2,
-        startDate
-      })
-    );
+    courseRepository.findById = jest.fn(() => Promise.resolve(origin));
+    courseRepository.update = jest.fn(() => Promise.resolve(updated));
+    courseRepository.findById = jest.fn(() => Promise.resolve(updated));
 
     const transaction = {} as ITransaction;
     transaction.begin = jest.fn(() => Promise.resolve());
@@ -41,11 +24,7 @@ describe('UpdateCourseInteractor', () => {
 
     const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
     const course = await updateCourseInteractor.execute(1, { name: name2 });
-    expect(course).toEqual({
-      id: 1,
-      name: name2,
-      startDate
-    });
+    expect(course).toEqual(updated);
     expect(courseRepository.update).toBeCalledWith(1, { name: name2 });
   });
 
@@ -56,29 +35,13 @@ describe('UpdateCourseInteractor', () => {
     const startDate = new Date();
     const startDate2 = new Date(startDate);
     startDate2.setMonth(startDate.getMonth() + 1);
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate
-      })
-    );
 
-    courseRepository.update = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate: startDate2
-      })
-    );
+    const origin = { id: 1, name, startDate };
+    const updated = { id: 1, name, startDate: startDate2 };
 
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate: startDate2
-      })
-    );
+    courseRepository.findById = jest.fn(() => Promise.resolve(origin));
+    courseRepository.update = jest.fn(() => Promise.resolve(updated));
+    courseRepository.findById = jest.fn(() => Promise.resolve(updated));
 
     const transaction = {} as ITransaction;
     transaction.begin = jest.fn(() => Promise.resolve());
@@ -86,11 +49,7 @@ describe('UpdateCourseInteractor', () => {
 
     const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
     const course = await updateCourseInteractor.execute(1, { startDate: startDate2 });
-    expect(course).toEqual({
-      id: 1,
-      name,
-      startDate: startDate2
-    });
+    expect(course).toEqual(updated);
     expect(courseRepository.update).toBeCalledWith(1, { startDate: startDate2 });
   });
 
@@ -101,31 +60,13 @@ describe('UpdateCourseInteractor', () => {
     const startDate = new Date();
     const endDate = new Date(startDate);
     endDate.setFullYear(startDate.getFullYear() + 1);
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate
-      })
-    );
 
-    courseRepository.update = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate,
-        endDate
-      })
-    );
+    const origin = { id: 1, name, startDate };
+    const updated = { id: 1, name, startDate, endDate };
 
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate,
-        endDate
-      })
-    );
+    courseRepository.findById = jest.fn(() => Promise.resolve(origin));
+    courseRepository.update = jest.fn(() => Promise.resolve(updated));
+    courseRepository.findById = jest.fn(() => Promise.resolve(updated));
 
     const transaction = {} as ITransaction;
     transaction.begin = jest.fn(() => Promise.resolve());
@@ -133,12 +74,7 @@ describe('UpdateCourseInteractor', () => {
 
     const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
     const course = await updateCourseInteractor.execute(1, { endDate });
-    expect(course).toEqual({
-      id: 1,
-      name,
-      startDate,
-      endDate
-    });
+    expect(course).toEqual(updated);
     expect(courseRepository.update).toBeCalledWith(1, { endDate });
   });
 
@@ -183,29 +119,12 @@ describe('UpdateCourseInteractor', () => {
     const name2 = 'Name 2';
     const startDate = new Date();
 
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name,
-        startDate
-      })
-    );
+    const origin = { id: 1, name, startDate };
+    const updated = { id: 1, name: name2, startDate };
 
-    courseRepository.update = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name: name2,
-        startDate
-      })
-    );
-
-    courseRepository.findById = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        name: name2,
-        startDate
-      })
-    );
+    courseRepository.findById = jest.fn(() => Promise.resolve(origin));
+    courseRepository.update = jest.fn(() => Promise.resolve(updated));
+    courseRepository.findById = jest.fn(() => Promise.resolve(updated));
 
     const transaction = {} as ITransaction;
     transaction.begin = jest.fn(() => Promise.resolve());
@@ -213,10 +132,6 @@ describe('UpdateCourseInteractor', () => {
 
     const updateCourseInteractor = new UpdateCourseInteractor(courseRepository, transaction);
     const course = await updateCourseInteractor.execute('1' as unknown as number, { name: name2 });
-    expect(course).toEqual({
-      id: 1,
-      name: name2,
-      startDate
-    });
+    expect(course).toEqual(updated);
   });
 });
