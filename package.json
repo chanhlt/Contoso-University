@@ -1,13 +1,14 @@
 {
   "name": "contoso-university",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "description": "Contoso University",
   "scripts": {
     "dev": "NODE_ENV=development HTTP_PORT=3000 nodemon --watch src src/index.ts",
-    "start": "NODE_ENV=production HTTP_PORT=3000 node .",
+    "start": "NODE_ENV=production HTTP_PORT=3000 node dist/index.js",
     "build": "rm -rf dist | true && tsc -p .",
-    "test": "jest --coverage --verbose --detectOpenHandles",
+    "test": "jest --coverage --verbose --detectOpenHandles --config=jest.config.js",
+    "test:core": "jest --coverage --verbose --detectOpenHandles --config=jest.config.core.js",
+    "test:app": "jest --coverage --verbose --detectOpenHandles --config=jest.config.app.js",
     "format": "prettier --write ."
   },
   "keywords": [],

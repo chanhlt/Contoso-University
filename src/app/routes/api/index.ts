@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 
-import course from './course.router';
+import course from '../../routers/course.router';
 
 const router = new Router();
 

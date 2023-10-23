@@ -8,7 +8,7 @@ const courseController = {
     const { name, startDate, endDate } = ctx.request.body as { name: string; startDate: Date; endDate?: Date };
     const courseRepository = new SimpleCourseRepository();
     const createCourseInteractor = new CreateCourseInteractor(courseRepository);
-    ctx.body = await createCourseInteractor.execute(name, startDate, endDate);
+    ctx.body = await createCourseInteractor.execute({ name, startDate, endDate });
   }
 };
 

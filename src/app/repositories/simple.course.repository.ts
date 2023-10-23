@@ -9,4 +9,17 @@ export class SimpleCourseRepository implements ICourseRepository {
     SimpleCourseRepository.courses.push(course);
     return Promise.resolve(course);
   }
+
+  update(id: number, payload: Partial<Course>): Promise<Course> {
+    throw new Error('Method not implemented.');
+  }
+  findById(id: number): Promise<Course | null> {
+    throw new Error('Method not implemented.');
+  }
+  findAll(offset: number, limit: number): Promise<Course[]> {
+    throw new Error('Method not implemented.');
+  }
+  count(): Promise<number> {
+    throw new Error('Method not implemented.');
+  }
 }
