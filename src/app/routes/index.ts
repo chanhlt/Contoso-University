@@ -12,6 +12,10 @@ router.get('/', (ctx) => {
   ctx.body = { status: 200, code: 'SYSTEM_READY' };
 });
 
+router.post('/', (ctx) => {
+  throw new Error('Unexpected error');
+});
+
 router.all('(.*)', (ctx) => {
   ctx.status = 404;
   ctx.body = new NotFoundError(ERROR.RESOURCE_NOT_FOUND);
