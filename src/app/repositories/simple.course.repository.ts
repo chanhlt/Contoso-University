@@ -11,15 +11,26 @@ export class SimpleCourseRepository implements ICourseRepository {
   }
 
   update(id: number, payload: Partial<Course>): Promise<Course> {
-    throw new Error('Method not implemented.');
+    const course = SimpleCourseRepository.courses.find((c) => c.id === id);
+    Object.assign(course!, payload);
+    return Promise.resolve(course!);
   }
+
   findById(id: number): Promise<Course | null> {
-    throw new Error('Method not implemented.');
+    const course = SimpleCourseRepository.courses.find((c) => c.id === id);
+    return Promise.resolve(course ?? null);
   }
+
   findAll(offset: number, limit: number): Promise<Course[]> {
-    throw new Error('Method not implemented.');
+    const total = SimpleCourseRepository.courses.length;
+    const count = Math.min(limit, total - offset);
+    if (offset >= total) {
+      return Promise.resolve([]);
+    }
+    return Promise.resolve(SimpleCourseRepository.courses.slice(offset, count));
   }
+
   count(): Promise<number> {
-    throw new Error('Method not implemented.');
+    return Promise.resolve(SimpleCourseRepository.courses.length);
   }
 }
