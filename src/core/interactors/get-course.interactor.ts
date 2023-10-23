@@ -18,7 +18,7 @@ export class GetCourseInteractor {
     if (!course) {
       throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
     }
-    return new CourseResponseModel(course);
+    return new CourseResponseModel(course.id!, course.name, course.startDate, course.endDate);
   }
 
   private toPositiveInt(input: number | undefined) {

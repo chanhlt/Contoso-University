@@ -32,7 +32,7 @@ export class UpdateCourseInteractor {
       await this.courseRepository.update(id, payload);
       const updated = await this.courseRepository.findById(id);
       await this.transaction.commit();
-      return new CourseResponseModel(updated!);
+      return new CourseResponseModel(updated!.id!, updated!.name, updated!.startDate, updated!.endDate);
     } catch (error) {
       await this.transaction.rollback();
       throw error;

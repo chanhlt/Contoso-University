@@ -12,18 +12,17 @@ export class CreateStudentInteractor {
   }
 
   public async execute(payload: StudentRequestModel): Promise<StudentResponseModel> {
-    const { firstName, lastName, grade, enrollmentDate } = payload;
-    if (!firstName) {
+    const student = new Student(null, payload.firstName, payload.lastName, payload.enrollmentDate, payload.grade);
+    if (!student.firstName) {
       throw new BadRequestError(ERROR.STUDENT_FIRST_NAME_IS_REQUIRED);
     }
-    if (!lastName) {
+    if (!student.lastName) {
       throw new BadRequestError(ERROR.STUDENT_LAST_NAME_IS_REQUIRED);
     }
-    if (!enrollmentDate) {
+    if (!student.enrollmentDate) {
       throw new BadRequestError(ERROR.STUDENT_ENROLLMENT_DATE_IS_REQUIRED);
     }
-    const student = new Student(firstName, lastName, enrollmentDate, grade);
-    const createdStudent = await this.studentRepository.create(student);
-    return new StudentResponseModel(createdStudent);
+    const { id, firstName, lastName, enrollmentDate, grade } = await this.studentRepository.create(student);
+    return new StudentResponseModel(id!, firstName, lastName, enrollmentDate, grade);
   }
 }

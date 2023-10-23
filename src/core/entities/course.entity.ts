@@ -1,6 +1,6 @@
 export class Course {
-  public id?: number;
   constructor(
+    public id: number | null,
     public name: string,
     public startDate: Date,
     public endDate?: Date

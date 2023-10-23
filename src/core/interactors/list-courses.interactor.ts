@@ -15,7 +15,12 @@ export class ListCoursesInteractor {
     const offset = (page - 1) * limit;
     const count = await this.courseRepository.count();
     const rows = await this.courseRepository.findAll(offset, limit);
-    return { count, rows: rows.map((row) => new CourseResponseModel(row)) };
+    return {
+      count,
+      rows: rows.map((row) => {
+        return new CourseResponseModel(row.id!, row.name, row.startDate, row.endDate);
+      })
+    };
   }
 
   private toPositiveInt(input: number, def: number) {

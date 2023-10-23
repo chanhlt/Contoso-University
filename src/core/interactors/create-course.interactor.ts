@@ -11,15 +11,15 @@ export class CreateCourseInteractor {
     this.courseRepository = courseRepository;
   }
 
-  public async execute({ name, startDate, endDate }: CourseRequestModel): Promise<CourseResponseModel> {
-    const course = new Course(name, startDate, endDate);
+  public async execute(payload: CourseRequestModel): Promise<CourseResponseModel> {
+    const course = new Course(null, payload.name, payload.startDate, payload.endDate);
     if (!course.name) {
       throw new BadRequestError(ERROR.COURSE_NAME_IS_REQUIRED);
     }
     if (!course.startDate) {
       throw new BadRequestError(ERROR.COURSE_START_DATE_IS_REQUIRED);
     }
-    const createdCourse = await this.courseRepository.create(course);
-    return new CourseResponseModel(createdCourse);
+    const { id, name, startDate, endDate } = await this.courseRepository.create(course);
+    return new CourseResponseModel(id!, name, startDate, endDate);
   }
 }

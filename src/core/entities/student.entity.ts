@@ -1,8 +1,8 @@
 import { Grade } from '../enums/grade.enum';
 
 export class Student {
-  public id?: number;
   constructor(
+    public id: number | null,
     public firstName: string,
     public lastName: string,
     public enrollmentDate: Date,
