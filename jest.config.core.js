@@ -4,5 +4,5 @@ module.exports = {
   testEnvironment: 'node',
   coverageReporters: ['html', 'text-summary'],
   collectCoverageFrom: ['src/core/**/*.ts'],
-  testMatch: ["**/tests/core/**/*.test.ts"]
+  testMatch: ['**/tests/core/**/*.test.ts']
 };
