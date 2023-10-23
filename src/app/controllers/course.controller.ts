@@ -25,14 +25,14 @@ const CourseController = {
   get: async (ctx: RouterContext) => {
     const { id } = ctx.params;
     const courseRepository = new SimpleCourseRepository();
-    const updateCourseInteractor = new GetCourseInteractor(courseRepository);
-    ctx.body = await updateCourseInteractor.execute(Number(id));
+    const getCourseInteractor = new GetCourseInteractor(courseRepository);
+    ctx.body = await getCourseInteractor.execute(Number(id));
   },
   list: async (ctx: RouterContext) => {
     const { page, limit } = ctx.query;
     const courseRepository = new SimpleCourseRepository();
-    const updateCourseInteractor = new ListCoursesInteractor(courseRepository);
-    ctx.body = await updateCourseInteractor.execute(Number(page), Number(limit));
+    const listCourseInteractor = new ListCoursesInteractor(courseRepository);
+    ctx.body = await listCourseInteractor.execute(Number(page), Number(limit));
   }
 };
 
