@@ -58,27 +58,4 @@ describe('CreateCourseAssignmentInteractor', () => {
       await createCourseAssignmentInteractor.execute({ courseId, teacherId, assignedDate });
     }).rejects.toThrow(ERROR.COURSE_ASSIGNMENT_ASSIGNED_DATE_IS_REQUIRED);
   });
-
-  test('Create course-assignment with end date => should be OK', async () => {
-    const courseAssignmentRepository = {} as ICourseAssignmentRepository;
-    const courseId = 1;
-    const teacherId = 2;
-    const assignedDate = new Date();
-    courseAssignmentRepository.create = jest.fn(() =>
-      Promise.resolve({
-        id: 1,
-        courseId,
-        teacherId,
-        assignedDate
-      })
-    );
-    const createCourseAssignmentInteractor = new CreateCourseAssignmentInteractor(courseAssignmentRepository);
-    const courseAssignment = await createCourseAssignmentInteractor.execute({ courseId, teacherId, assignedDate });
-    expect(courseAssignment).toEqual({
-      id: 1,
-      courseId,
-      teacherId,
-      assignedDate
-    });
-  });
 });

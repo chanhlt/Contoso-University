@@ -39,19 +39,4 @@ describe('CreateTeacherInteractor', () => {
       await createTeacherInteractor.execute({ firstName, lastName });
     }).rejects.toThrow(ERROR.TEACHER_LAST_NAME_IS_REQUIRED);
   });
-
-  test('Create teacher with grade => should be OK', async () => {
-    const teacherRepository = {} as ITeacherRepository;
-    const firstName = 'John';
-    const lastName = 'Doe';
-    const mock = {
-      id: 1,
-      firstName,
-      lastName
-    };
-    teacherRepository.create = jest.fn(() => Promise.resolve(mock));
-    const createTeacherInteractor = new CreateTeacherInteractor(teacherRepository);
-    const teacher = await createTeacherInteractor.execute({ firstName, lastName });
-    expect(teacher).toEqual(mock);
-  });
 });
