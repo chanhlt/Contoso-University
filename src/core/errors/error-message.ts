@@ -9,5 +9,7 @@ export const ERROR_MESSAGE: Record<ERROR, string> = {
   [ERROR.COURSE_START_DATE_IS_REQUIRED]: 'Course Start Date is required',
   [ERROR.COURSE_UPDATE_PAYLOAD_EMPTY]: 'Course update payload is empty',
   [ERROR.COURSE_NOT_FOUND]: 'Course not found',
-  [ERROR.RESOURCE_NOT_FOUND]: 'Resource not found'
+  [ERROR.RESOURCE_NOT_FOUND]: 'Resource not found',
+  [ERROR.TEACHER_FIRST_NAME_IS_REQUIRED]: 'Teacher First Name is required',
+  [ERROR.TEACHER_LAST_NAME_IS_REQUIRED]: 'Teacher Last Name is required'
 };
