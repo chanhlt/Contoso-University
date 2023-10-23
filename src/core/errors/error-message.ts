@@ -11,5 +11,8 @@ export const ERROR_MESSAGE: Record<ERROR, string> = {
   [ERROR.COURSE_NOT_FOUND]: 'Course not found',
   [ERROR.RESOURCE_NOT_FOUND]: 'Resource not found',
   [ERROR.TEACHER_FIRST_NAME_IS_REQUIRED]: 'Teacher First Name is required',
-  [ERROR.TEACHER_LAST_NAME_IS_REQUIRED]: 'Teacher Last Name is required'
+  [ERROR.TEACHER_LAST_NAME_IS_REQUIRED]: 'Teacher Last Name is required',
+  [ERROR.COURSE_ASSIGNMENT_COURSE_ID_IS_REQUIRED]: 'Course-Assignment Course ID is required',
+  [ERROR.COURSE_ASSIGNMENT_TEACHER_ID_IS_REQUIRED]: 'Course-Assignment Teacher ID is required',
+  [ERROR.COURSE_ASSIGNMENT_ASSIGNED_DATE_IS_REQUIRED]: 'Course-Assignment Assigned Date is required'
 };
