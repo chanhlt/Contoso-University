@@ -23,6 +23,6 @@ export class CreateCourseAssignmentInteractor {
       throw new BadRequestError(ERROR.COURSE_ASSIGNMENT_ASSIGNED_DATE_IS_REQUIRED);
     }
     const { id, courseId, teacherId, assignedDate } = await this.courseAssignmentRepository.create(courseAssignment);
-    return new CourseAssignmentResponseModel(id!, courseId, teacherId, assignedDate);
+    return { id: id!, courseId, teacherId, assignedDate };
   }
 }

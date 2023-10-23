@@ -1,7 +1,5 @@
-export class TeacherResponseModel {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string
-  ) {}
-}
+export type TeacherResponseModel = {
+  id: number;
+  firstName: string;
+  lastName: string;
+};

@@ -1,8 +1,6 @@
-export class CourseResponseModel {
-  constructor(
-    public id: number,
-    public name: string,
-    public startDate: Date,
-    public endDate?: Date
-  ) {}
-}
+export type CourseResponseModel = {
+  id: number;
+  name: string;
+  startDate: Date;
+  endDate?: Date;
+};

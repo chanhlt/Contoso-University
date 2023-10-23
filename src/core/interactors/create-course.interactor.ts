@@ -20,6 +20,6 @@ export class CreateCourseInteractor {
       throw new BadRequestError(ERROR.COURSE_START_DATE_IS_REQUIRED);
     }
     const { id, name, startDate, endDate } = await this.courseRepository.create(course);
-    return new CourseResponseModel(id!, name, startDate, endDate);
+    return { id: id!, name, startDate, endDate };
   }
 }

@@ -14,13 +14,12 @@ export class ListCoursesInteractor {
     limit = this.toPositiveInt(limit, 10);
     const offset = (page - 1) * limit;
     const count = await this.courseRepository.count();
-    const rows = await this.courseRepository.findAll(offset, limit);
-    return {
-      count,
-      rows: rows.map((row) => {
-        return new CourseResponseModel(row.id!, row.name, row.startDate, row.endDate);
-      })
-    };
+    const courses = await this.courseRepository.findAll(offset, limit);
+    const rows = courses.map((course) => {
+      const { id, name, startDate, endDate } = course;
+      return { id: id!, name, startDate, endDate };
+    });
+    return { count, rows };
   }
 
   private toPositiveInt(input: number, def: number) {

@@ -1,11 +1,9 @@
 import { Grade } from '../enums/grade.enum';
 
-export class StudentResponseModel {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public enrollmentDate: Date,
-    public grade?: Grade
-  ) {}
-}
+export type StudentResponseModel = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  enrollmentDate: Date;
+  grade?: Grade;
+};

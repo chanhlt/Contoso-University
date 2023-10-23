@@ -30,9 +30,9 @@ export class UpdateCourseInteractor {
         throw new NotFoundError(ERROR.COURSE_NOT_FOUND);
       }
       await this.courseRepository.update(id, payload);
-      const updated = await this.courseRepository.findById(id);
+      const { name, startDate, endDate } = (await this.courseRepository.findById(id))!;
       await this.transaction.commit();
-      return new CourseResponseModel(updated!.id!, updated!.name, updated!.startDate, updated!.endDate);
+      return { id, name, startDate, endDate };
     } catch (error) {
       await this.transaction.rollback();
       throw error;

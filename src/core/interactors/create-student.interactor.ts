@@ -23,6 +23,6 @@ export class CreateStudentInteractor {
       throw new BadRequestError(ERROR.STUDENT_ENROLLMENT_DATE_IS_REQUIRED);
     }
     const { id, firstName, lastName, enrollmentDate, grade } = await this.studentRepository.create(student);
-    return new StudentResponseModel(id!, firstName, lastName, enrollmentDate, grade);
+    return { id: id!, firstName, lastName, enrollmentDate, grade };
   }
 }

@@ -20,6 +20,6 @@ export class CreateTeacherInteractor {
       throw new BadRequestError(ERROR.TEACHER_LAST_NAME_IS_REQUIRED);
     }
     const { id, firstName, lastName } = await this.teacherRepository.create(teacher);
-    return new TeacherResponseModel(id!, firstName, lastName);
+    return { id: id!, firstName, lastName };
   }
 }

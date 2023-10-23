@@ -1,8 +1,6 @@
-export class CourseAssignmentResponseModel {
-  constructor(
-    public id: number,
-    public courseId: number,
-    public teacherId: number,
-    public assignedDate: Date
-  ) {}
-}
+export type CourseAssignmentResponseModel = {
+  id: number;
+  courseId: number;
+  teacherId: number;
+  assignedDate: Date;
+};
