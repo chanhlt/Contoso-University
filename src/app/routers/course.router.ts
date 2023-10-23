@@ -1,9 +1,9 @@
 import Router from 'koa-router';
 
-import courseController from '../controllers/course.controller';
+import CourseController from '../controllers/course.controller';
 
 const router = new Router();
 
-router.post('/', courseController.create);
+router.post('/', CourseController.create);
 
 export default router;
