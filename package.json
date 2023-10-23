@@ -11,9 +11,9 @@
     "test:app": "jest --coverage --verbose --detectOpenHandles --config=jest.config.app.js",
     "format": "prettier --write ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["Practice", "Clean Architecture"],
+  "author": "Chanh Le",
+  "license": "See LICENSE file",
   "devDependencies": {
     "@types/jest": "^29.5.5",
     "@types/koa": "^2.13.9",
