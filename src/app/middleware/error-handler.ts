@@ -1,5 +1,5 @@
 import { Context, Next } from 'koa';
-import { AppError } from '../../core/errors/app-error';
+import { AppError } from '../../core/errors/app.error';
 
 export const errorHandler = async (ctx: Context, next: Next) => {
   try {
