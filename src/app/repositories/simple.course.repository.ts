@@ -12,7 +12,13 @@ export class SimpleCourseRepository implements ICourseRepository {
 
   update(id: number, payload: Partial<Course>): Promise<Course> {
     const course = SimpleCourseRepository.courses.find((c) => c.id === id);
-    Object.assign(course!, payload);
+    const updateData: { [key: string]: unknown } = {};
+    for (const prop in payload) {
+      if (payload[prop as keyof Course] !== undefined) {
+        updateData[prop] = payload[prop as keyof Course];
+      }
+    }
+    Object.assign(course!, updateData);
     return Promise.resolve(course!);
   }
 

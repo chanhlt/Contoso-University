@@ -43,7 +43,10 @@ export class UpdateCourseInteractor {
     if (!payload) {
       return true;
     }
-    return Object.keys(payload).length === 0;
+    if (Object.keys(payload).length === 0) {
+      return true;
+    }
+    return Object.keys(payload).every((key) => payload[key as keyof CourseRequestModel] === undefined);
   }
 
   private toPositiveInt(input: number | undefined) {
